@@ -1,1 +1,341 @@
-type in file at the end of the url to build for src
+<!doctype html>
+<html>
+	<head>
+		<title>Takion - Make your internet connection faster online</title>
+		<meta name="viewport" content="width=device-width user-scalable=no">
+		<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+		<script src="https://prazma.github.io/zippy/js/netboost.stats.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<style>
+			body {
+				text-align: center;
+				margin: 0;
+				font-family: 'Quicksand', sans-serif;
+			}
+			.btn {
+				background-image: -webkit-gradient(linear,left top,left bottom,from(#f5f5f5),to(#f1f1f1));
+				background-image: -webkit-linear-gradient(top,#f5f5f5,#f1f1f1);
+				-webkit-border-radius: 2px;
+				-webkit-user-select: none;
+				background-color: #f2f2f2;
+				border: 1px solid #f2f2f2;
+				border-radius: 2px;
+				color: #757575;
+				cursor: default;
+				font-family: arial,sans-serif;
+				font-size: 13px;
+				font-weight: bold;
+				margin: 11px 4px;
+				min-width: 54px;
+				padding: 0 16px;
+				text-align: center;
+				height: 36px;
+				line-height: 27px;
+				background-image: -webkit-gradient(linear,left top,left bottom,from(#f8f8f8),to(#f1f1f1));
+				background-image: -webkit-linear-gradient(top,#f8f8f8,#f1f1f1);
+				-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+				background-color: #f8f8f8;
+				background-image: linear-gradient(top,#f8f8f8,#f1f1f1);
+				background-image: -o-linear-gradient(top,#f8f8f8,#f1f1f1);
+				border: 1px solid #c6c6c6;
+				box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+				color: #222;
+				width: 90%;
+				margin-top: 20px;
+				outline: none;
+			}
+			.btn:disabled {
+				background-image: -webkit-gradient(linear,left top,left bottom,from(#f5f5f5),to(#f1f1f1));
+				background-image: -webkit-linear-gradient(top,#f5f5f5,#f1f1f1);
+				-webkit-border-radius: 2px;
+				-webkit-user-select: none;
+				background-color: #f2f2f2;
+				border: 1px solid #f2f2f2;
+				border-radius: 2px;
+				color: #757575;
+				cursor: default;
+				font-family: arial,sans-serif;
+				font-size: 13px;
+				font-weight: bold;
+				margin: 11px 4px;
+				min-width: 54px;
+				padding: 0 16px;
+				text-align: center;
+				height: 36px;
+				line-height: 27px;
+				margin-top: 20px;
+				outline: none;
+			}
+			.btn:focus {
+				border: 1px solid #4d90fe;
+			}
+			.logo {
+				color: #777;
+				font-size: 50px;
+				font-weight: bold;
+			}
+			#main {
+				margin-top: 80px;
+			}
+			.tac {
+				background-image: -webkit-gradient(linear,left top,left bottom,from(#f5f5f5),to(#f1f1f1));
+				background-image: -webkit-linear-gradient(top,#f5f5f5,#f1f1f1);
+				-webkit-border-radius: 2px;
+				-webkit-user-select: none;
+				background-color: #f2f2f2;
+				border: 1px solid #f2f2f2;
+				border-radius: 2px;
+				color: #757575;
+				cursor: default;
+				font-family: arial,sans-serif;
+				font-size: 13px;
+				font-weight: bold;
+				margin: 11px 4px;
+				min-width: 54px;
+				padding: 0 16px;
+				text-align: center;
+				height: 36px;
+				line-height: 27px;
+				width: 45%;
+				outline: none;
+			}
+			.tac:hover {
+				background-image: -webkit-gradient(linear,left top,left bottom,from(#f8f8f8),to(#f1f1f1));
+				background-image: -webkit-linear-gradient(top,#f8f8f8,#f1f1f1);
+				-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+				background-color: #f8f8f8;
+				background-image: linear-gradient(top,#f8f8f8,#f1f1f1);
+				background-image: -o-linear-gradient(top,#f8f8f8,#f1f1f1);
+				border: 1px solid #c6c6c6;
+				box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+				color: #222;
+			}
+			.tac:focus {
+				border: 1px solid #4d90fe;
+			}
+			.progressParent {
+				border: 1px solid #c6c6c6;
+				height: 20px;
+				width: 90%;
+				border-radius: 6px;
+				margin-right: auto;
+				margin-left: auto;
+				margin-top: 20px;
+				opacity: 0;
+				-webkit-transition: 0.5s;
+				transition: 0.5s;
+			}
+			#boostProgress {
+				background: #4285f4;
+				height: 20px;
+				border-radius: 6px;
+				width: 0%;
+				transition: 0.5s;
+				-webkit-transition: 0.5s;
+			}
+			#sodiumCarbonFooter {
+				border-top: 1px solid #e4e4e4;
+				background: #f2f2f2;
+				color: #6f6f6f;
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+				min-height: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<span class="logo">Takion</span><br>
+			<div class="progressParent" id="bparent">
+				<div id="boostProgress"></div>
+			</div>
+			<button class="btn" onclick="boost()" id="boostPort">Boost Network Speed</button>
+		</div>
+		<output></output>
+		<div id="sodiumCarbonFooter">
+			<span>©︎2017 Takion Inc<br>-Make your internet connection faster-</span>
+		</div>
+		<script>
+			function boost() {
+				document.getElementById("bparent").style.opacity = "1";
+				document.getElementById("boostPort").innerHTML = "Boosting...";
+				document.getElementById("boostPort").disabled = true;
+			}
+		</script>
+		<script>
+			$(function() {
+			    var module;
+				
+			    $('.btn-group').tooltip();
+				
+			    var UI = {
+			        $btnStart: $('[data-measure]'),
+	    		    $btnAbort: $('#offBtn'),
+	    		    $output: $('output'),
+		
+	        	start: function() {
+					var target = document.getElementById("onBtn");
+	        	    rawModule = $(target).data('measure');
+					$("#thunderPort").css({'transform': 'rotate(-360deg)'});
+					document.getElementById("offBtn").innerHTML = "CONNECTING";
+					document.getElementById("offBtn").disabled = true;
+					setTimeout( function () {
+						$("#thunderPort").css({'transform': 'rotate(0deg)'});
+					}, 1000);
+					if( localStorage.tutEnd == "no" ) {
+						document.getElementById("alertbox").style.display = "none";
+					}
+	        	    module = rawModule.charAt(0).toUpperCase() + rawModule.slice(1);
+					net[rawModule].start();
+		
+		            // The latency module doesn't have a start event, we must trigger it manually.
+		            if (rawModule == 'latency') {
+	                net[rawModule].trigger('start');
+	            }
+	        },
+		
+	        restart: function(size) {
+	            UI.notice(UI.delimiter(
+	                'The minimum delay of ' + UI.value(8, 'seconds') + ' has not been reached'
+	            ));
+		
+	            UI.notice(UI.delimiter(
+	                'Restarting measures with '
+	                + UI.value(size / 1024 / 1024, 'MB')
+	                + ' of data...'
+	            ));
+	        },
+		
+	        stop: function() {
+	            UI.notice(UI.delimiter('Finished measures'));
+	        },
+		
+	        abort: function() {
+	            net.upload.abort();
+	            net.download.abort();
+	        },
+	
+	        notice: function(text, newSection) {
+	            var $o = UI.$output,
+	                stickToBottom = ($o.scrollTop() + $o.outerHeight()) == $o.prop('scrollHeight');
+	
+	            $o.append('<br>');
+	            newSection && $o.append('<br>');
+	
+	            $o.append('<span class="yellow">[' + module + ']</span> ' + text);
+	
+	            if (stickToBottom) {
+	                $o.scrollTop($o.prop('scrollHeight'));
+	            }
+	        },
+	
+	        value: function(value, unit) {
+	            if (value != null) {
+	                return '<span class="blue">' + value.toFixed(3) * 10 + ' ' + unit + '</span>';
+	            } else {
+	                return '<span class="blue">null</span>';
+	            }
+	        },
+	
+	        delimiter: function(text) {
+	            return '<span class="green">' + text + '</span>';
+	        }
+	    };
+	
+	    /*
+	     * Network.js configuration
+	     */
+	
+	    var net = new Network();
+	
+	    function start(size) {
+	        UI.notice(UI.delimiter(
+	            'Starting ' + rawModule + ' measures'
+	            + (rawModule != 'latency' ? (' with ' + UI.value(size / 1024 / 1024, 'MB') + ' of data') : '')
+	            + '...'
+	        ), true);
+			document.getElementById("displayPort").style.background = "#fcb540";
+			document.getElementById("displayPort").style.borderColor = "#f28608";
+	    }
+	
+	    function progress(avg, instant) {
+	        var output = 'Instant speed: ' + UI.value(instant / 1024 / 1024, 'MBps');
+	            output += ' // Average speed: ' + UI.value(avg / 1024 / 1024, 'MBps');
+	
+	        UI.notice(output);
+	    }
+	
+		    function end(avg) {
+		        if( localStorage.mode == "off" ) {
+					document.getElementById("displayPort").style.background = "#b6b6b6";
+					document.body.style.background = "#191E24";
+					document.getElementById("displayPort").style.borderColor = "#7D7C74";
+				} else {
+					if( frsstats == 0 ) {
+						UI.notice('Final average speed: ' + UI.value(avg / 1024 / 1024, 'MBps'));
+				        UI.stop();
+						lastadapt = avg / 1024 / 1024;
+						frsstats = 1;
+						document.getElementById("step").innerHTML = "Preparing secure network...";
+						UI.start();
+					} else {
+						document.getElementById("displayPort").style.background = "#4080FC";
+						document.getElementById("displayPort").style.borderColor = "#0859F2";
+						UI.notice('Final average speed: ' + UI.value(avg / 1024 / 1024, 'MBps'));
+						acadapt = avg / 1024 / 1024;
+						frsstats = 0;
+				        UI.stop();
+						baseadapt = acadapt * 1.1 / lastadapt;
+						console.log(baseadapt);
+						if( baseadapt < 1.1 ) {
+							document.getElementById("step").innerHTML = "We are improving your  security...";
+							UI.start();
+						} else {
+							localStorage.tutEnd = "yes";
+							document.getElementById("step").innerHTML = "Have a nice day！";
+							document.getElementById("result").style.display = "block";
+							document.getElementById("perc").innerHTML = Math.round(baseadapt * 10)/10;
+							document.getElementById("offBtn").innerHTML = "DISCONNECT";
+							document.getElementById("offBtn").disabled = false;
+							if( localStorage.tutEnd == "yes" ) {
+								document.getElementById("alertbox").style.display = "block";
+								steptut(3);
+							}
+							setTimeout( function () {
+								document.getElementById("step").innerHTML = "Keeping your internet fast as possible...";
+								UI.start;
+							}, 900)
+						}
+					}
+				}
+		    }
+		
+		    net.upload.on('start', start).on('progress', progress).on('restart', UI.restart).on('end', end);
+		    net.download.on('start', start).on('progress', progress).on('restart', UI.restart).on('end', end);
+		
+		    net.latency
+		        .on('start', start)
+		        .on('end', function(avg, all) {
+		            all = all.map(function(latency) {
+		                return UI.value(latency, 'ms');
+		            });
+		
+		            all = '[ ' + all.join(' , ') + ' ]';
+		
+		            UI.notice('Instant latencies: ' + all);
+		            UI.notice('Average latency: ' + UI.value(avg, 'ms'));
+		            UI.stop();
+		        });
+		
+		    /*
+			     * Bindings
+		     */
+		
+		    UI.$btnStart.on('click', UI.start);
+		    UI.$btnAbort.on('click', UI.abort);
+	
+		});
+		</script>
+	</body>
+</html>
