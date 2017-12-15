@@ -4,8 +4,7 @@
 		<title>Takion - Make your internet connection faster online</title>
 		<meta name="viewport" content="width=device-width user-scalable=no">
 		<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-		<script src="https://prazma.github.io/zippy/js/netboost.stats.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css">
 		<style>
 			body {
 				text-align: center;
@@ -142,6 +141,24 @@
 				width: 100%;
 				min-height: 50px;
 			}
+			output {
+		    	margin-bottom: 40px;
+		    	border-radius: 4px;
+		    	height: 100px;
+				width: 90%;
+				margin-top: 20px;
+				margin-right: auto;
+				margin-left: auto;
+		   		padding: 9.5px;
+				background-color: #2d2d2d;
+				font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+				font-size: 90%;
+				color: #fff;
+				overflow: auto;
+				opacity: 0;
+				transition: 0.5s;
+				-webkit-transition: 0.5s;
+			}
 		</style>
 	</head>
 	<body>
@@ -150,19 +167,23 @@
 			<div class="progressParent" id="bparent">
 				<div id="boostProgress"></div>
 			</div>
-			<button class="btn" onclick="boost()" id="boostPort">Boost Network Speed</button>
+			<button class="btn" onclick="boost()" id="onBtn" data-measure="upload">Boost Network Speed</button>
 		</div>
-		<output></output>
+		<output id="sdtl"></output>
 		<div id="sodiumCarbonFooter">
 			<span>©︎2017 Takion Inc<br>-Make your internet connection faster-</span>
 		</div>
 		<script>
 			function boost() {
 				document.getElementById("bparent").style.opacity = "1";
-				document.getElementById("boostPort").innerHTML = "Boosting...";
-				document.getElementById("boostPort").disabled = true;
+				document.getElementById("onBtn").innerHTML = "Boosting...";
+				document.getElementById("onBtn").disabled = true;
+				document.getElementById("sdtl").style.opacity = "1";
 			}
 		</script>
+		<script src="https://prazma.github.io/zippy/js/netboost.stats.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/tooltip.min.js"></script>
 		<script>
 			$(function() {
 			    var module;
@@ -177,12 +198,7 @@
 	        	start: function() {
 					var target = document.getElementById("onBtn");
 	        	    rawModule = $(target).data('measure');
-					$("#thunderPort").css({'transform': 'rotate(-360deg)'});
-					document.getElementById("offBtn").innerHTML = "CONNECTING";
-					document.getElementById("offBtn").disabled = true;
-					setTimeout( function () {
-						$("#thunderPort").css({'transform': 'rotate(0deg)'});
-					}, 1000);
+					
 					if( localStorage.tutEnd == "no" ) {
 						document.getElementById("alertbox").style.display = "none";
 					}
@@ -255,8 +271,6 @@
 	            + (rawModule != 'latency' ? (' with ' + UI.value(size / 1024 / 1024, 'MB') + ' of data') : '')
 	            + '...'
 	        ), true);
-			document.getElementById("displayPort").style.background = "#fcb540";
-			document.getElementById("displayPort").style.borderColor = "#f28608";
 	    }
 	
 	    function progress(avg, instant) {
@@ -267,48 +281,10 @@
 	    }
 	
 		    function end(avg) {
-		        if( localStorage.mode == "off" ) {
-					document.getElementById("displayPort").style.background = "#b6b6b6";
-					document.body.style.background = "#191E24";
-					document.getElementById("displayPort").style.borderColor = "#7D7C74";
-				} else {
-					if( frsstats == 0 ) {
-						UI.notice('Final average speed: ' + UI.value(avg / 1024 / 1024, 'MBps'));
-				        UI.stop();
-						lastadapt = avg / 1024 / 1024;
-						frsstats = 1;
-						document.getElementById("step").innerHTML = "Preparing secure network...";
-						UI.start();
-					} else {
-						document.getElementById("displayPort").style.background = "#4080FC";
-						document.getElementById("displayPort").style.borderColor = "#0859F2";
-						UI.notice('Final average speed: ' + UI.value(avg / 1024 / 1024, 'MBps'));
-						acadapt = avg / 1024 / 1024;
-						frsstats = 0;
-				        UI.stop();
-						baseadapt = acadapt * 1.1 / lastadapt;
-						console.log(baseadapt);
-						if( baseadapt < 1.1 ) {
-							document.getElementById("step").innerHTML = "We are improving your  security...";
-							UI.start();
-						} else {
-							localStorage.tutEnd = "yes";
-							document.getElementById("step").innerHTML = "Have a nice day！";
-							document.getElementById("result").style.display = "block";
-							document.getElementById("perc").innerHTML = Math.round(baseadapt * 10)/10;
-							document.getElementById("offBtn").innerHTML = "DISCONNECT";
-							document.getElementById("offBtn").disabled = false;
-							if( localStorage.tutEnd == "yes" ) {
-								document.getElementById("alertbox").style.display = "block";
-								steptut(3);
-							}
-							setTimeout( function () {
-								document.getElementById("step").innerHTML = "Keeping your internet fast as possible...";
-								UI.start;
-							}, 900)
-						}
-					}
-				}
+				UI.notice('Final average speed: ' + UI.value(avg / 1024 / 1024, 'MBps'));
+			    UI.stop();
+				lastadapt = avg / 1024 / 1024;
+				UI.start();
 		    }
 		
 		    net.upload.on('start', start).on('progress', progress).on('restart', UI.restart).on('end', end);
